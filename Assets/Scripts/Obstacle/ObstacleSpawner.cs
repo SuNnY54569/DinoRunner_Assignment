@@ -8,8 +8,8 @@ public class ObstacleSpawner : MonoBehaviour
     [SerializeField] private Transform spawnPoint;
 
     [Header("Spawn Settings")]
-    [SerializeField] private float minSpawnTime = 1.2f;
-    [SerializeField] private float maxSpawnTime = 2.5f;
+    [SerializeField] private float minSpawnDistance = 10f;
+    [SerializeField] private float maxSpawnDistance = 18f;
 
     [Header("Game Speed")]
     [SerializeField] private float startSpeed = 8f;
@@ -79,9 +79,11 @@ public class ObstacleSpawner : MonoBehaviour
 
     private void SetNextSpawnTime()
     {
-        spawnTimer = Random.Range(
-            minSpawnTime,
-            maxSpawnTime
+        float spawnDistance = Random.Range(
+            minSpawnDistance,
+            maxSpawnDistance
         );
+
+        spawnTimer = spawnDistance / CurrentSpeed;
     }
 }

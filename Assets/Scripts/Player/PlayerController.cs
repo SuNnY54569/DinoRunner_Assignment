@@ -20,6 +20,9 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private float crouchHeight = 0.9f;
     [SerializeField] private Vector2 crouchOffset = new(0f, -0.45f);
     
+    [Header("Fast Fall")]
+    [SerializeField] private float fastFallSpeed = 18f;
+    
     [Header("Game Feel")]
     [SerializeField] private float coyoteTime = 0.1f;
     [SerializeField] private float jumpBufferTime = 0.1f;
@@ -67,6 +70,7 @@ public class PlayerController : MonoBehaviour
     private void FixedUpdate()
     {
         HandleJump();
+        HandleFastFall();
     }
 
     private void UpdateState()
@@ -172,6 +176,20 @@ public class PlayerController : MonoBehaviour
             rb.velocity.x,
             rb.velocity.y * jumpCutMultiplier
         );
+    }
+    
+    private void HandleFastFall()
+    {
+        if (!playerInput.CrouchHeld || IsGrounded())
+            return;
+
+        if (rb.velocity.y < 0f)
+        {
+            rb.velocity = new Vector2(
+                rb.velocity.x,
+                Mathf.Min(rb.velocity.y, -fastFallSpeed)
+            );
+        }
     }
     
     private void UpdateCoyoteTimer()
