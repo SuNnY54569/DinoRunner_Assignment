@@ -214,6 +214,68 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &645588852
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 645588854}
+  - component: {fileID: 645588853}
+  - component: {fileID: 645588855}
+  m_Layer: 0
+  m_Name: GameManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &645588853
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 645588852}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 40baf983191829f43ae75bacc6b03261, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  startSpeed: 8
+  maxSpeed: 15
+  speedIncrease: 0.5
+--- !u!4 &645588854
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 645588852}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 22.196127, y: 6.3466635, z: -0.07039057}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &645588855
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 645588852}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 41672c00002589144b0d5e4f54ee121e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  gameManager: {fileID: 645588853}
+  scoreMultiplier: 1
 --- !u!1 &742442914
 GameObject:
   m_ObjectHideFlags: 0
@@ -472,6 +534,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6e9129a737eacd24ebdd2d2df3963387, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  gameManager: {fileID: 645588853}
   obstacleData:
   - {fileID: 11400000, guid: ec29e85995b2dbe4cb6f4f60d1702521, type: 2}
   - {fileID: 11400000, guid: 1c3b4427678b02b4782dbe2769c4bb8c, type: 2}
@@ -479,11 +542,8 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 27a8b75d8762d984aa481302fd1382b6, type: 2}
   - {fileID: 11400000, guid: 7cd5ea4d11e25a7489b4a40d16c3d8fe, type: 2}
   spawnPoint: {fileID: 1197772332}
-  minSpawnTime: 1.2
-  maxSpawnTime: 2.5
-  startSpeed: 8
-  maxSpeed: 15
-  speedIncrease: 0.5
+  minSpawnDistance: 10
+  maxSpawnDistance: 18
 --- !u!1 &1618146022
 GameObject:
   m_ObjectHideFlags: 0
@@ -631,11 +691,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ba09a64447245f54db23d89df2b97712, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  gameManager: {fileID: 645588853}
   playerInput: {fileID: 1792113739}
   playerCollider: {fileID: 0}
   groundCheck: {fileID: 1618146023}
   rb: {fileID: 1792113737}
-  jumpForce: 10
+  jumpForce: 12
   jumpCutMultiplier: 0.5
   groundCheckRadius: 0.1
   groundLayer:
@@ -643,6 +704,7 @@ MonoBehaviour:
     m_Bits: 64
   crouchHeight: 0.5
   crouchOffset: {x: 0, y: -0.25}
+  fastFallSpeed: 12
   coyoteTime: 0.1
   jumpBufferTime: 0.1
 --- !u!4 &1792113741
@@ -789,3 +851,4 @@ SceneRoots:
   - {fileID: 742442917}
   - {fileID: 1197772332}
   - {fileID: 2000201923}
+  - {fileID: 645588854}

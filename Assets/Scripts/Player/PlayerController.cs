@@ -3,6 +3,7 @@ using UnityEngine;
 public class PlayerController : MonoBehaviour
 {
     [Header("References")]
+    [SerializeField] private GameManager gameManager;
     [SerializeField] private PlayerInput playerInput;
     [SerializeField] private BoxCollider2D playerCollider;
     [SerializeField] private Transform groundCheck;
@@ -96,6 +97,9 @@ public class PlayerController : MonoBehaviour
 
     private void HandleJump()
     {
+        if (currentState == PlayerState.Dead)
+            return;
+        
         if (jumpBufferTimer <= 0f)
             return;
 
@@ -122,6 +126,9 @@ public class PlayerController : MonoBehaviour
 
     private void HandleCrouch()
     {
+        if (currentState == PlayerState.Dead)
+            return;
+        
         if (!isGrounded)
         {
             SetStandingCollider();
@@ -215,5 +222,14 @@ public class PlayerController : MonoBehaviour
         {
             jumpBufferTimer -= Time.deltaTime;
         }
+    }
+    
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (!collision.gameObject.TryGetComponent<Obstacle>(out Obstacle obstacle))
+            return;
+
+        gameManager.GameOver();
+        currentState = PlayerState.Dead;
     }
 }

@@ -3,7 +3,8 @@ using UnityEngine;
 
 public class ObstacleSpawner : MonoBehaviour
 {
-    [Header("References")]
+    [Header("References")] 
+    [SerializeField] private GameManager gameManager;
     [SerializeField] private ObstacleData[] obstacleData;
     [SerializeField] private Transform spawnPoint;
 
@@ -11,15 +12,8 @@ public class ObstacleSpawner : MonoBehaviour
     [SerializeField] private float minSpawnDistance = 10f;
     [SerializeField] private float maxSpawnDistance = 18f;
 
-    [Header("Game Speed")]
-    [SerializeField] private float startSpeed = 8f;
-    [SerializeField] private float maxSpeed = 15f;
-    [SerializeField] private float speedIncrease = 0.5f;
-
     private float spawnTimer;
     private float elapsedTime;
-    
-    private float CurrentSpeed => Mathf.Min(startSpeed + elapsedTime * speedIncrease, maxSpeed);
     
     private void Start()
     {
@@ -51,7 +45,7 @@ public class ObstacleSpawner : MonoBehaviour
             Quaternion.identity
         ).GetComponent<Obstacle>();
 
-        obstacle.Initialize(CurrentSpeed);
+        obstacle.Initialize(gameManager.CurrentSpeed);
     }
     
     private ObstacleData GetRandomAvailableObstacle()
@@ -84,6 +78,6 @@ public class ObstacleSpawner : MonoBehaviour
             maxSpawnDistance
         );
 
-        spawnTimer = spawnDistance / CurrentSpeed;
+        spawnTimer = spawnDistance / gameManager.CurrentSpeed;
     }
 }
