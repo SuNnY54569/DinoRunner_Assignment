@@ -1,0 +1,17 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b6b300e21889dcc4aa270434b2182c3e, type: 3}
+  m_Name: 3Rock
+  m_EditorClassIdentifier: 
+  obstacleName: 3Rock
+  prefab: {fileID: 4540260357940249986, guid: 9ed58da5419263e44b29ce3b80155539, type: 3}
+  unlockTime: 30

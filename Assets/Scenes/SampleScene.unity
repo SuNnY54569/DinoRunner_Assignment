@@ -338,8 +338,8 @@ Transform:
   m_GameObject: {fileID: 742442914}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: -1.5, z: 0}
-  m_LocalScale: {x: 13.69, y: 1, z: 1}
+  m_LocalPosition: {x: 0, y: -1, z: 0}
+  m_LocalScale: {x: 25, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -428,6 +428,62 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!1 &1197772331
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1197772332}
+  - component: {fileID: 1197772333}
+  m_Layer: 0
+  m_Name: ObstacleSpawner
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1197772332
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1197772331}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 15, y: -0.5, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1197772333
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1197772331}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6e9129a737eacd24ebdd2d2df3963387, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  obstacleData:
+  - {fileID: 11400000, guid: ec29e85995b2dbe4cb6f4f60d1702521, type: 2}
+  - {fileID: 11400000, guid: 1c3b4427678b02b4782dbe2769c4bb8c, type: 2}
+  - {fileID: 11400000, guid: 7508c9395fdbb0a419074915047a9c8f, type: 2}
+  - {fileID: 11400000, guid: 27a8b75d8762d984aa481302fd1382b6, type: 2}
+  - {fileID: 11400000, guid: 7cd5ea4d11e25a7489b4a40d16c3d8fe, type: 2}
+  spawnPoint: {fileID: 1197772332}
+  minSpawnTime: 1.2
+  maxSpawnTime: 2.5
+  startSpeed: 8
+  maxSpeed: 15
+  speedIncrease: 0.5
 --- !u!1 &1618146022
 GameObject:
   m_ObjectHideFlags: 0
@@ -494,7 +550,7 @@ Rigidbody2D:
   m_Mass: 1
   m_LinearDrag: 0
   m_AngularDrag: 0.05
-  m_GravityScale: 1
+  m_GravityScale: 2
   m_Material: {fileID: 0}
   m_IncludeLayers:
     serializedVersion: 2
@@ -579,7 +635,7 @@ MonoBehaviour:
   playerCollider: {fileID: 0}
   groundCheck: {fileID: 1618146023}
   rb: {fileID: 1792113737}
-  jumpForce: 8
+  jumpForce: 10
   jumpCutMultiplier: 0.5
   groundCheckRadius: 0.1
   groundLayer:
@@ -598,7 +654,7 @@ Transform:
   m_GameObject: {fileID: 1792113736}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: -5.4, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -613,3 +669,4 @@ SceneRoots:
   - {fileID: 519420032}
   - {fileID: 1792113741}
   - {fileID: 742442917}
+  - {fileID: 1197772332}

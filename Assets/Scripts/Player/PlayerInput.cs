@@ -11,9 +11,9 @@ public class PlayerInput : MonoBehaviour
 
     private void Update()
     {
-        JumpPressed = Input.GetKeyDown(KeyCode.W);
-        JumpReleased = Input.GetKeyUp(KeyCode.W);
-        JumpHeld = Input.GetKey(KeyCode.W);
-        CrouchHeld = Input.GetKey(KeyCode.S);
+        JumpPressed = Input.GetKeyDown(KeyCode.Space) || Input.GetKeyDown(KeyCode.UpArrow);
+        JumpReleased = Input.GetKeyUp(KeyCode.Space) || Input.GetKeyUp(KeyCode.UpArrow);
+        JumpHeld = Input.GetKey(KeyCode.Space) || Input.GetKey(KeyCode.UpArrow);
+        CrouchHeld = Input.GetKey(KeyCode.DownArrow);
     }
 }
