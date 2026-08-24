@@ -38,6 +38,8 @@ public class PlayerController : MonoBehaviour
     private float coyoteTimer;
     private float jumpBufferTimer;
 
+    private Vector3 startPosition;
+
     private void Awake()
     {
         if (rb == null)
@@ -52,6 +54,8 @@ public class PlayerController : MonoBehaviour
 
         standingHeight = playerCollider.size.y;
         standingOffset = playerCollider.offset;
+
+        startPosition = transform.position;
     }
 
     private void Update()
@@ -231,5 +235,18 @@ public class PlayerController : MonoBehaviour
 
         gameManager.GameOver();
         currentState = PlayerState.Dead;
+    }
+    
+    public void ResetPlayer()
+    {
+        rb.velocity = Vector2.zero;
+        transform.position = startPosition;
+
+        currentState = PlayerState.Grounded;
+
+        jumpBufferTimer = 0f;
+        coyoteTimer = 0f;
+
+        SetStandingCollider();
     }
 }

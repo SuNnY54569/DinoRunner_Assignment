@@ -15,6 +15,8 @@ public class ScoreManager : MonoBehaviour
 
     private void Update()
     {
+        if (gameManager.IsGameOver) return;
+        
         distance += Time.deltaTime * gameManager.CurrentSpeed;
         CurrentScore = Mathf.FloorToInt(distance * scoreMultiplier);
 
@@ -22,7 +24,11 @@ public class ScoreManager : MonoBehaviour
         {
             HighScore = CurrentScore;
         }
-        
-        Debug.Log($"Score = {CurrentScore}");
+    }
+    
+    public void ResetScore()
+    {
+        distance = 0f;
+        CurrentScore = 0;
     }
 }

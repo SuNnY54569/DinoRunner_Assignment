@@ -15,6 +15,8 @@ public class ObstacleSpawner : MonoBehaviour
     private float spawnTimer;
     private float elapsedTime;
     
+    private readonly List<Obstacle> spawnedObstacles = new();
+    
     private void Start()
     {
         SetNextSpawnTime();
@@ -46,6 +48,8 @@ public class ObstacleSpawner : MonoBehaviour
         ).GetComponent<Obstacle>();
 
         obstacle.Initialize(gameManager.CurrentSpeed);
+        
+        spawnedObstacles.Add(obstacle);
     }
     
     private ObstacleData GetRandomAvailableObstacle()
@@ -79,5 +83,23 @@ public class ObstacleSpawner : MonoBehaviour
         );
 
         spawnTimer = spawnDistance / gameManager.CurrentSpeed;
+    }
+    
+    public void ResetSpawner()
+    {
+        foreach (Obstacle obstacle in spawnedObstacles)
+        {
+            if (obstacle != null)
+            {
+                Destroy(obstacle.gameObject);
+            }
+        }
+
+        spawnedObstacles.Clear();
+
+        elapsedTime = 0f;
+        spawnTimer = 0f;
+
+        SetNextSpawnTime();
     }
 }
