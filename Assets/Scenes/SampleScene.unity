@@ -576,8 +576,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerInput: {fileID: 1792113739}
-  collider: {fileID: 1792113738}
+  playerCollider: {fileID: 0}
   groundCheck: {fileID: 1618146023}
+  rb: {fileID: 1792113737}
   jumpForce: 8
   jumpCutMultiplier: 0.5
   groundCheckRadius: 0.1

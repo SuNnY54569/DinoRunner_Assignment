@@ -1,13 +1,12 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
     [Header("References")]
     [SerializeField] private PlayerInput playerInput;
-    [SerializeField] private BoxCollider2D collider;
+    [SerializeField] private BoxCollider2D playerCollider;
     [SerializeField] private Transform groundCheck;
+    [SerializeField] private Rigidbody2D rb;
 
     [Header("Jump")]
     [SerializeField] private float jumpForce = 12f;
@@ -25,16 +24,15 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private float coyoteTime = 0.1f;
     [SerializeField] private float jumpBufferTime = 0.1f;
 
-    private Rigidbody2D rb;
-
     private PlayerState currentState = PlayerState.Grounded;
+
+    private bool isGrounded;
 
     private float standingHeight;
     private Vector2 standingOffset;
     
     private float coyoteTimer;
     private float jumpBufferTimer;
-    private bool jumpReleasedBeforeJump;
 
     private void Awake()
     {
@@ -43,17 +41,19 @@ public class PlayerController : MonoBehaviour
             rb = GetComponent<Rigidbody2D>();
         }
 
-        if (collider == null)
+        if (playerCollider == null)
         {
-            collider = GetComponent<BoxCollider2D>();
+            playerCollider = GetComponent<BoxCollider2D>();
         }
 
-        standingHeight = collider.size.y;
-        standingOffset = collider.offset;
+        standingHeight = playerCollider.size.y;
+        standingOffset = playerCollider.offset;
     }
 
     private void Update()
     {
+        isGrounded = IsGrounded();
+        
         UpdateCoyoteTimer();
         UpdateJumpBuffer();
         UpdateState();
@@ -74,9 +74,7 @@ public class PlayerController : MonoBehaviour
         if (currentState == PlayerState.Dead)
             return;
 
-        bool grounded = IsGrounded();
-
-        if (!grounded)
+        if (!isGrounded)
         {
             currentState = rb.velocity.y > 0f ? PlayerState.Jumping : PlayerState.Falling;
 
@@ -120,12 +118,11 @@ public class PlayerController : MonoBehaviour
 
     private void HandleCrouch()
     {
-        if (!IsGrounded())
+        if (!isGrounded)
         {
             SetStandingCollider();
             return;
         }
-
         
         if (currentState == PlayerState.Crouching)
         {
@@ -139,22 +136,22 @@ public class PlayerController : MonoBehaviour
 
     private void SetCrouchCollider()
     {
-        collider.size = new Vector2(
-            collider.size.x,
+        playerCollider.size = new Vector2(
+            playerCollider.size.x,
             crouchHeight
         );
 
-        collider.offset = crouchOffset;
+        playerCollider.offset = crouchOffset;
     }
 
     private void SetStandingCollider()
     {
-        collider.size = new Vector2(
-            collider.size.x,
+        playerCollider.size = new Vector2(
+            playerCollider.size.x,
             standingHeight
         );
 
-        collider.offset = standingOffset;
+        playerCollider.offset = standingOffset;
     }
 
     private bool IsGrounded()
@@ -179,7 +176,7 @@ public class PlayerController : MonoBehaviour
     
     private void UpdateCoyoteTimer()
     {
-        if (IsGrounded())
+        if (isGrounded)
         {
             coyoteTimer = coyoteTime;
         }
