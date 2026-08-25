@@ -30,9 +30,14 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private ParticleSystem runDust;
     [SerializeField] private ParticleSystem landDust;
 
+    [Header("Sprite Change")] 
+    [SerializeField] private GameObject standingVisual;
+    [SerializeField] private GameObject crouchingVisual;
+
     private PlayerState currentState = PlayerState.Grounded;
 
     private bool isGrounded;
+    private bool isCrouching;
 
     private float standingHeight;
     private Vector2 standingOffset;
@@ -71,6 +76,7 @@ public class PlayerController : MonoBehaviour
         UpdateJumpBuffer();
         UpdateState();
         HandleCrouch();
+        UpdateVisual();
         UpdateRunDust();
         UpdateLandingDust();
             
@@ -293,5 +299,13 @@ public class PlayerController : MonoBehaviour
         }
 
         wasGrounded = grounded;
+    }
+    
+    private void UpdateVisual()
+    {
+        isCrouching = currentState == PlayerState.Crouching;
+
+        standingVisual.SetActive(!isCrouching);
+        crouchingVisual.SetActive(isCrouching);
     }
 }
