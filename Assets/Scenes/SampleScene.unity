@@ -361,7 +361,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0b60c3353f78fd4428e166f2d1c7fb1f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  duration: 0.15
+  duration: 0.3
   magnitude: 0.15
 --- !u!1 &576360414
 GameObject:
@@ -604,6 +604,7 @@ MonoBehaviour:
   startSpeed: 8
   maxSpeed: 15
   speedIncrease: 0.5
+  hitStopDuration: 0.3
 --- !u!4 &645588854
 Transform:
   m_ObjectHideFlags: 0

@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using UnityEngine;
 
 public class GameManager : MonoBehaviour
@@ -17,6 +18,9 @@ public class GameManager : MonoBehaviour
     [SerializeField] private float startSpeed = 8f;
     [SerializeField] private float maxSpeed = 15f;
     [SerializeField] private float speedIncrease = 0.5f;
+
+    [Header("HitStop")] 
+    [SerializeField] private float hitStopDuration = 0.3f;
     
     public float CurrentSpeed { get; private set; }
     private float elapsedTime;
@@ -43,12 +47,21 @@ public class GameManager : MonoBehaviour
     {
         if (IsGameOver)
             return;
-        
+
         IsGameOver = true;
+
+        StartCoroutine(GameOverRoutine());
+    }
+    
+    private IEnumerator GameOverRoutine()
+    {
         cameraShake.Shake();
-        scoreUI.SetScoreActive(false);
-        gameOverUI.ShowGameOver();
+
         Time.timeScale = 0f;
+
+        yield return new WaitForSecondsRealtime(hitStopDuration);
+
+        gameOverUI.ShowGameOver();
     }
     
     public void RestartGame()
