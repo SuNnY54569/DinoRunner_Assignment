@@ -27,6 +27,8 @@ public class PlayerController : MonoBehaviour
     [Header("Game Feel")]
     [SerializeField] private float coyoteTime = 0.1f;
     [SerializeField] private float jumpBufferTime = 0.1f;
+    [SerializeField] private ParticleSystem runDust;
+    [SerializeField] private ParticleSystem landDust;
 
     private PlayerState currentState = PlayerState.Grounded;
 
@@ -39,6 +41,9 @@ public class PlayerController : MonoBehaviour
     private float jumpBufferTimer;
 
     private Vector3 startPosition;
+
+    private bool shouldPlayRunDust;
+    private bool wasGrounded;
 
     private void Awake()
     {
@@ -66,6 +71,9 @@ public class PlayerController : MonoBehaviour
         UpdateJumpBuffer();
         UpdateState();
         HandleCrouch();
+        UpdateRunDust();
+        UpdateLandingDust();
+            
         if (playerInput.JumpReleased)
         {
             CutJump();
@@ -246,7 +254,44 @@ public class PlayerController : MonoBehaviour
 
         jumpBufferTimer = 0f;
         coyoteTimer = 0f;
+        
+        wasGrounded = true;
+        
+        runDust.Stop();
+        landDust.Stop();
 
         SetStandingCollider();
+    }
+    
+    private void UpdateRunDust()
+    {
+        shouldPlayRunDust = IsGrounded();
+
+        if (shouldPlayRunDust)
+        {
+            if (!runDust.isPlaying)
+            {
+                runDust.Play();
+            }
+        }
+        else
+        {
+            if (runDust.isPlaying)
+            {
+                runDust.Stop();
+            }
+        }
+    }
+    
+    private void UpdateLandingDust()
+    {
+        bool grounded = IsGrounded();
+
+        if (!wasGrounded && grounded)
+        {
+            landDust.Play();
+        }
+
+        wasGrounded = grounded;
     }
 }
