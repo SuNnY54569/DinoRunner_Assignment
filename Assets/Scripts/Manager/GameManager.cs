@@ -10,6 +10,8 @@ public class GameManager : MonoBehaviour
     [SerializeField] private ScoreManager scoreManager;
     [SerializeField] private ObstacleSpawner obstacleSpawner;
     [SerializeField] private GameOverUI gameOverUI;
+    [SerializeField] private CameraShake cameraShake;
+    [SerializeField] private ScoreUI scoreUI;
     
     [Header("Game Speed")]
     [SerializeField] private float startSpeed = 8f;
@@ -41,9 +43,10 @@ public class GameManager : MonoBehaviour
     {
         if (IsGameOver)
             return;
-
-        Debug.Log("GameOver");
+        
         IsGameOver = true;
+        cameraShake.Shake();
+        scoreUI.SetScoreActive(false);
         gameOverUI.ShowGameOver();
         Time.timeScale = 0f;
     }
@@ -60,6 +63,7 @@ public class GameManager : MonoBehaviour
         scoreManager.ResetScore();
         playerController.ResetPlayer();
         obstacleSpawner.ResetSpawner();
+        scoreUI.SetScoreActive(true);
 
         gameOverUI.Hide();
     }

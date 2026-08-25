@@ -15,4 +15,10 @@ public class ScoreUI : MonoBehaviour
         scoreText.text = $"SCORE: {scoreManager.CurrentScore:0000}";
         highScoreText.text = $"HIGH SCORE: {scoreManager.HighScore:0000}";
     }
+    
+    public void SetScoreActive(bool isActive)
+    {
+        scoreText.gameObject.SetActive(isActive);
+        highScoreText.gameObject.SetActive(isActive);
+    }
 }
